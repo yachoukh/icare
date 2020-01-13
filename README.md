@@ -106,6 +106,13 @@ Special thanks to all developers of open source libraries used in this project.
 
 
 
+## Docker
+
+```ssh
+openssl req -subj '/CN=localhost' -x509 -newkey rsa:4096 -nodes -keyout docker/nginx/ssl/app_key.pem -out docker/nginx/ssl/app_cert.pem -days 825
+openssl genpkey -genparam -algorithm DH -out docker/nginx/ssl/app_dhparam4096.pem -pkeyopt dh_paramgen_prime_len:4096
+```
+
 ## Donations
 
 If you like this project or you are considering to use it (or any part of it) for commercial purposes, please make a donation to the authors.
