@@ -21,6 +21,6 @@
         span.fas.fa-pencil-alt<>
         = t('helpers.titles.edit', model: Itinerary.model_name.human)
   - else
-    = link_to user_facebook_omniauth_authorize_path, class: 'btn btn-fb', data: { turbolinks: false } do
+    = link_to user_facebook_omniauth_authorize_path, class: 'btn btn-fb', method: :post do
       span.fab.fa-facebook<>
       = t('.login_to_contact')

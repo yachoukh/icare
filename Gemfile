@@ -51,6 +51,7 @@ gem 'rgeo', '~> 2.0'
 # Facebook integration
 gem 'koala', '~> 3.0'
 gem 'omniauth-facebook', '~> 5.0'
+gem 'omniauth-rails_csrf_protection', '~> 0.1.2'
 
 # Performance
 gem 'newrelic_rpm', '~> 6.8'
