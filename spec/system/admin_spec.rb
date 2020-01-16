@@ -6,7 +6,7 @@ RSpec.describe 'Admin' do
   let!(:admin) { create :user, admin: true, uid: '123456' }
 
   before do
-    visit user_facebook_omniauth_authorize_path
+    omniauth_login
   end
 
   #   it "sees reports" do

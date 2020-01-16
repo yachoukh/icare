@@ -4,14 +4,14 @@ require 'rails_helper'
 
 RSpec.describe 'Sessions' do
   it 'allows users to sign in from Facebook' do
-    visit user_facebook_omniauth_authorize_path
+    omniauth_login
 
     expect(page).to have_css "a[href=\"#{destroy_user_session_path}\"]"
     expect(User.count).not_to be_zero
   end
 
   it 'allows users to logout' do
-    visit user_facebook_omniauth_authorize_path
+    omniauth_login
 
     click_link t('logout')
     expect(page).to have_content t('login_with_facebook')
@@ -31,7 +31,7 @@ RSpec.describe 'Sessions' do
     it 'saves some user information from auth hash' do
       user = create :user, uid: '123456'
 
-      visit user_facebook_omniauth_authorize_path
+      omniauth_login
 
       user.reload
 
@@ -48,7 +48,7 @@ RSpec.describe 'Sessions' do
       OmniAuth.config.mock_auth[:facebook] = :invalid_credentials
       create :user, uid: '123456', name: 'Duncan MacLeod'
 
-      visit user_facebook_omniauth_authorize_path
+      omniauth_login
 
       expect(page).to have_current_path root_path
       expect(page).to have_content t('devise.omniauth_callbacks.failure', kind: 'Facebook', reason: 'Invalid credentials')

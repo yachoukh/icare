@@ -16,7 +16,7 @@ RSpec.describe 'Users' do
   it 'allows to delete account' do
     create :user, uid: '123456'
 
-    visit user_facebook_omniauth_authorize_path
+    omniauth_login
 
     click_link t('delete_account')
 
@@ -28,7 +28,7 @@ RSpec.describe 'Users' do
   describe 'Settings' do
     it 'allows to edit profile' do
       user = create :user, uid: '123456'
-      visit user_facebook_omniauth_authorize_path
+      omniauth_login
       visit settings_path
       fill_in 'user_vehicle_avg_consumption', with: '0.29'
       click_button t('helpers.submit.update', model: User)
@@ -38,7 +38,7 @@ RSpec.describe 'Users' do
 
     it 'recovers from errors' do
       create :user, uid: '123456'
-      visit user_facebook_omniauth_authorize_path
+      omniauth_login
       visit settings_path
       fill_in 'user_vehicle_avg_consumption', with: nil
       click_button t('helpers.submit.update', model: User)
@@ -53,7 +53,7 @@ RSpec.describe 'Users' do
       create_list :itinerary, 5
       create :user, uid: '123456'
 
-      visit user_facebook_omniauth_authorize_path
+      omniauth_login
 
       expect(page).to have_css('.table-itinerary tbody tr', count: 5)
     end
@@ -69,7 +69,7 @@ RSpec.describe 'Users' do
         it 'shows them' do
           create :user, uid: '123456', gender: 'female'
 
-          visit user_facebook_omniauth_authorize_path
+          omniauth_login
 
           expect(page).to have_css('.table-itinerary tbody tr', count: 6)
         end
@@ -79,7 +79,7 @@ RSpec.describe 'Users' do
         it 'hides them' do
           create :user, uid: '123456', gender: 'male'
 
-          visit user_facebook_omniauth_authorize_path
+          omniauth_login
 
           expect(page).to have_css('.table-itinerary tbody tr', count: 5)
         end
@@ -97,7 +97,7 @@ RSpec.describe 'Users' do
 
     before do
       user
-      visit user_facebook_omniauth_authorize_path
+      omniauth_login
       visit user_path(user)
     end
 
