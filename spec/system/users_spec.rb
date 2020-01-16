@@ -117,7 +117,6 @@ RSpec.describe 'Users' do
 
     context 'when user is verified' do
       it 'adds the verified box' do
-        visit user_facebook_omniauth_authorize_path
         visit user_path(user)
 
         expect(page).to have_css '.facebook-verified'
